@@ -51,20 +51,24 @@ class tasksController extends Controller
 
     public function show($id)
     {
-        $task = Task::find($id);
-
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+        if (\Auth::check()) {
+            $task = Task::find($id);
+    
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
+        }
     }
 
     public function edit($id)
     {
-        $task = Task::find($id);
-
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+        if (\Auth::check()) {
+            $task = Task::find($id);
+    
+            return view('tasks.edit', [
+                'task' => $task,
+            ]);
+        }
     }
 
     public function update(Request $request, $id)
@@ -83,9 +87,11 @@ class tasksController extends Controller
 
     public function destroy($id)
     {
-        $task = Task::find($id);
-        $task->delete();
-
-        return redirect('/');
+        if (\Auth::check()) {
+            $task = Task::find($id);
+            $task->delete();
+    
+            return redirect('/');
+        }
     }
 }
