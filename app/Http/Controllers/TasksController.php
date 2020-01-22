@@ -51,7 +51,7 @@ class tasksController extends Controller
 
     public function show($id)
     {
-        if (\Auth::check()) {
+        if (\Auth::user()==$id) {
             $task = Task::find($id);
     
             return view('tasks.show', [
@@ -62,7 +62,7 @@ class tasksController extends Controller
 
     public function edit($id)
     {
-        if (\Auth::check()) {
+        if (\Auth::user()==$id) {
             $task = Task::find($id);
     
             return view('tasks.edit', [
@@ -87,7 +87,7 @@ class tasksController extends Controller
 
     public function destroy($id)
     {
-        if (\Auth::check()) {
+        if (\Auth::user()==$id) {
             $task = Task::find($id);
             $task->delete();
     
